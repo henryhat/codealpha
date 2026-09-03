@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeAlpha — Music Player</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="music.css">
+</head>
+<body>
+
+<div class="player-shell">
+  <!-- MAIN CARD -->
+  <div class="card">
+    <div class="player-header">
+      <div class="wordmark">CodeAlpha <br><span>raveWorld
+      </span></div>
+      <button class="playlist-toggle" id="playlistToggleBtn" aria-expanded="false" aria-controls="playlistDrawer">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="2" y1="4" x2="14" y2="4"/>
+          <line x1="2" y1="8" x2="10" y2="8"/>
+          <line x1="2" y1="12" x2="12" y2="12"/>
+        </svg>
+    Songs
+      </button>
+    </div>
+
+    <!-- VINYL -->
+    <div class="vinyl-wrap" id="vinylWrap">
+      <div class="vinyl">
+        <div class="vinyl-art" id="vinylArt">🎵</div>
+      </div>
+    </div>
+
+    <!-- SONG INFO -->
+    <div class="song-info">
+      <div class="song-title" id="songTitle">Loading…</div>
+      <div class="song-artist" id="songArtist">—</div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-section">
+      <div class="progress-bar-track" id="progressTrack" role="slider" aria-label="Seek" tabindex="0">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-times">
+        <span id="timeElapsed">0:00</span>
+        <span id="timeDuration">0:00</span>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls" role="group" aria-label="Playback controls">
+      <button class="ctrl-btn secondary" id="shuffleBtn" aria-label="Shuffle" title="Shuffle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 3 21 3 21 8"/><polyline points="16 21 21 21 21 16"/>
+          <line x1="4" y1="20" x2="21" y2="3"/><path d="M21 16l-5 5"/>
+          <path d="M4 4l5 5"/>
+        </svg>
+      </button>
+      <button class="ctrl-btn secondary" id="prevBtn" aria-label="Previous track">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+        </svg>
+      </button>
+      <button class="ctrl-btn primary" id="playPauseBtn" aria-label="Play">
+        <!-- Play icon -->
+        <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <!-- Pause icon -->
+        <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      </button>
+      <button class="ctrl-btn secondary" id="nextBtn" aria-label="Next track">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+        </svg>
+      </button>
+      <button class="ctrl-btn secondary" id="repeatBtn" aria-label="Repeat" title="Repeat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- VOLUME -->
+    <div class="volume-row">
+      <div class="volume-icon" id="volumeIcon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none" opacity="0.7"/>
+          <path id="volWave1" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          <path id="volWave2" d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+      </div>
+      <input type="range" id="volumeSlider" min="0" max="100" value="80" aria-label="Volume">
+      <span class="volume-pct" id="volumePct">80%</span>
+    </div>
+  </div>
+
+  <!-- PLAYLIST DRAWER -->
+  <div class="playlist-drawer" id="playlistDrawer" role="region" aria-label="Playlist">
+    <div class="playlist-header">
+      <span class="playlist-label">Up Next</span>
+      <label class="autoplay-toggle" title="Autoplay">
+        <input type="checkbox" id="autoplayCheck" checked>
+        <span class="toggle-pill"></span>
+        Autoplay
+      </label>
+    </div>
+    <ul class="playlist-list" id="playlistList" role="listbox" aria-label="Playlist"></ul>
+  </div>
+</div>
+
+<audio id="audioEl"></audio>
+
+<script src="music.js"></script>
+</body>
+</html>
